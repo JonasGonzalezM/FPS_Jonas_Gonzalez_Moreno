@@ -5,12 +5,15 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
-    public float moveSpeed;
+    private float moveSpeed;
+    public float walkspeed;
+    public float sprintSpeed;
+
 
 
     public float groundDrag;
 
-
+    [Header("Jump")]
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
@@ -18,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
+    public KeyCode sprintKey = KeyCode.LeftShift;
 
     [Header("Ground Check")]
     public float playerHeight;
@@ -32,6 +36,16 @@ public class PlayerMovement : MonoBehaviour
     Vector3 moveDirection;
 
     Rigidbody rb;
+
+    //esta variable siempre guardara el estado actual del Player
+    public MovementState state;
+
+    public enum MovementState
+    {
+        walking,
+        sprinting,
+        air
+    }
 
     private void Start()
     {
@@ -49,6 +63,8 @@ public class PlayerMovement : MonoBehaviour
 
         MyInput();
         SpeedControl();
+        StateHandler();
+        
 
 
         //Manejo del drag
@@ -81,6 +97,30 @@ public class PlayerMovement : MonoBehaviour
             Jump();
 
             Invoke(nameof(ResetJump), jumpCooldown);
+        }
+    }
+
+    private void StateHandler()
+    {
+        //Modo -Sprinting
+        if(grounded && Input.GetKey(sprintKey))
+        {
+            state = MovementState.sprinting;
+            moveSpeed = sprintSpeed;
+
+        }
+
+        //Modo -Andar
+        else if(grounded)
+        {
+            state = MovementState.walking;
+            moveSpeed = walkspeed;
+        }
+
+        //Modo - Aire
+        else
+        {
+            state = MovementState.air;
         }
     }
 
@@ -129,4 +169,6 @@ public class PlayerMovement : MonoBehaviour
     {
         readyToJump = true;
     }
+
+   
 }
