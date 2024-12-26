@@ -46,6 +46,7 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody rb;
 
+    //Esto lo que se encargará es de guardar los estados del jugador ya sea correr, agacharse, andar o estar en el aire.
     public MovementState state;
     
     public enum MovementState
