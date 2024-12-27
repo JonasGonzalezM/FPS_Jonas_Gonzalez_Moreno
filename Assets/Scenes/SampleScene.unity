@@ -245,7 +245,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &330585544
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1683,6 +1683,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1887001201}
   - component: {fileID: 1887001200}
+  - component: {fileID: 1887001204}
   - component: {fileID: 1887001203}
   - component: {fileID: 1887001202}
   m_Layer: 0
@@ -1744,7 +1745,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1887001199}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 23f9d3723bdfee14d9888091ffae1a07, type: 3}
   m_Name: 
@@ -1774,29 +1775,49 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1887001199}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 23ea5e14dd49d5d41ac381f43e895f5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   walkSpeed: 7
   sprintSpeed: 10
+  slideSpeed: 30
   groundDrag: 5
   jumpForce: 11
   jumpCooldown: 0.25
   airMultiplier: 0.4
-  crouchSpeed: 0
-  crouchYScale: 0
+  crouchSpeed: 3.5
+  crouchYScale: 0.5
   jumpKey: 32
   sprintKey: 304
-  crouchKey: 306
+  crouchKey: 99
   playerHeight: 2
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
-  maxSlopeAngle: 40
+  maxSlopeAngle: 2
   orientation: {fileID: 498737573}
   state: 0
+  sliding: 0
+--- !u!114 &1887001204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887001199}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d17841efcbca4764a897ef768ceb6b2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  orientation: {fileID: 498737573}
+  playerObj: {fileID: 1498656987}
+  maxSlideTime: 0.75
+  slideForce: 400
+  slideYScale: 0.5
+  slideKey: 306
 --- !u!1 &1913247399
 GameObject:
   m_ObjectHideFlags: 0
