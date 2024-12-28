@@ -248,7 +248,11 @@ public class PlayerMovementAdvanced : MonoBehaviour
         }
 
         //Apagar la gravedad cuando estemos en una cuesta o pendiente
-        rb.useGravity = !OnSlope();
+        if (!wallrunning)
+        {
+            rb.useGravity = !OnSlope();
+
+        }
     }
 
     private void SpeedControl()

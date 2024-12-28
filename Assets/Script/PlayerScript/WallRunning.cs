@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class WallRunning : MonoBehaviour
 {
 
@@ -9,10 +10,10 @@ public class WallRunning : MonoBehaviour
     public LayerMask whatIsWall;
     public LayerMask whatIsGround;
     public float wallRunForce;
-    public float maxWallRunTime;
     public float wallClimbSpeed;
     public float wallJumpUpForce;
     public float wallJumpSideForce;
+    public float maxWallRunTime;
     private float wallRunTimer;
 
 
@@ -41,7 +42,12 @@ public class WallRunning : MonoBehaviour
     public float exitWallTime;
     private float exitWallTimer;
 
+    [Header("Gravedad")]
+    public bool useGravity;
+    public float gravityCounterForce;
+
     [Header("Referencias")]
+    public PlayerCam cam;
     public Transform orientation;
     private PlayerMovementAdvanced pm;
     private Rigidbody rb;
@@ -107,6 +113,18 @@ public class WallRunning : MonoBehaviour
                 StartWallRun();
             }
 
+            //Timer Wallrun
+            if(wallRunTimer > 0)
+            {
+                wallRunTimer -= Time.deltaTime;
+            }
+
+            if(wallRunTimer <=0 && pm.wallrunning)
+            {
+                exitingWall = true;
+                exitWallTimer = exitWallTime;
+            }
+
             //Wall Jump
             if(Input.GetKeyDown(jumpKey))
             {
@@ -149,13 +167,28 @@ public class WallRunning : MonoBehaviour
     private void StartWallRun()
     {
         pm.wallrunning = true;
+
+        wallRunTimer = maxWallRunTime;
+        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+
+
+        // Aplicar efectos de camara
+        cam.DoFov(90f);
+        if (wallLeft)
+        {
+            cam.DoTilt(-5f);
+        }
+        if(wallRight)
+        {
+            cam.DoTilt(5f);
+        }
     }
 
 
     private void WallRunningMovement()
     {
-        rb.useGravity = false;
-        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        rb.useGravity = useGravity;
 
 
         Vector3 wallNormal = wallRight ? rightWallhit.normal : leftWallhit.normal;
@@ -192,12 +225,22 @@ public class WallRunning : MonoBehaviour
             rb.AddForce(-wallNormal * 100, ForceMode.Force);
 
         }
+
+        //debilitar un poco la gravedad para que no sea tan brusca
+        if (useGravity)
+        {
+            rb.AddForce(transform.up * gravityCounterForce, ForceMode.Force);
+        }
     }
 
 
     private void StopWallRun()
     {
         pm.wallrunning = false;
+
+        //Resetear los efectos de camara
+        cam.DoFov(80f);
+        cam.DoTilt(0f);
     }
 
 
