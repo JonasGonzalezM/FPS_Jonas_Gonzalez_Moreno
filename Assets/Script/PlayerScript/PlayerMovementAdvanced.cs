@@ -10,12 +10,11 @@ public class PlayerMovementAdvanced : MonoBehaviour
     public float walkSpeed;
     public float sprintSpeed;
     public float slideSpeed;
-
-    public float groundDrag;
-
-
     private float desiredMoveSpeed;
     private float lastDesiredMoveSpeed;
+    public float wallrunSpeed;
+
+    public float groundDrag;
 
     [Header("Jumping")]
     public float jumpForce;
@@ -59,12 +58,15 @@ public class PlayerMovementAdvanced : MonoBehaviour
     {
         walking,
         sprinting,
+        wallrunning,
         crouching,
         sliding,
         air
     }
 
     public bool sliding;
+    public bool crouching;
+    public bool wallrunning;
 
     private void Start()
     {
@@ -129,6 +131,16 @@ public class PlayerMovementAdvanced : MonoBehaviour
 
     private void StateHandler()
     {
+        //Modo - Wallrunning
+        if (wallrunning)
+        {
+            state = MovementState.wallrunning;
+            desiredMoveSpeed = wallrunSpeed;
+        }
+
+
+
+
         // Modo - Deslizamiento
         if (sliding)
         {
