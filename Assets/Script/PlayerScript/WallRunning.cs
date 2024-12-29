@@ -174,7 +174,7 @@ public class WallRunning : MonoBehaviour
 
 
         // Aplicar efectos de camara
-        cam.DoFov(90f);
+        cam.DoFov(70f);
         if (wallLeft)
         {
             cam.DoTilt(-5f);
@@ -239,7 +239,7 @@ public class WallRunning : MonoBehaviour
         pm.wallrunning = false;
 
         //Resetear los efectos de camara
-        cam.DoFov(80f);
+        cam.DoFov(60f);
         cam.DoTilt(0f);
     }
 
