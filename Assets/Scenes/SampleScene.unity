@@ -237,6 +237,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 124180460}
+  - component: {fileID: 124180462}
   - component: {fileID: 124180461}
   m_Layer: 0
   m_Name: Fusil
@@ -332,6 +333,26 @@ MonoBehaviour:
     type: 3}
   ammunitionDisplay: {fileID: 0}
   allowInvoke: 1
+--- !u!114 &124180462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124180459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 005b60271bafd1a43819c60f045692f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  balaPrefab: {fileID: 3315226272547808848, guid: 60bfaeb017c8d3a448444e0cceabff95,
+    type: 3}
+  puntoDeDisparo: {fileID: 1483374342}
+  velocidadDeDisparo: 200
+  tiempoVidaBala: 3
+  fuerzaRetroceso: 0.08
+  duracionRetroceso: 0.03
+  brazoPadre: {fileID: 1813249800}
 --- !u!1 &303334534
 GameObject:
   m_ObjectHideFlags: 0
